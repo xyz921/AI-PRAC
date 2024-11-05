@@ -1,0 +1,38 @@
+Prac5:- Selection sort
+
+Title:--------
+
+problem statement: Implement-------
+
+Theory:- 
+Greed Algorithm: A greedy algorithm is a widely-used algorithmic paradigm that builds a solution piece by piece, making the most immediate and apparent choice at each step with the hope of finding a global optimum. The essence of greedy algorithms lies in their method of choosing the locally optimal solution at each stage, which may lead to a solution that is not necessarily optimal overall.
+
+Selection Sort: Selection Sort is a simple and intuitive comparison-based sorting algorithm. It works by dividing the input list into two parts: a sorted portion and an unsorted portion. The algorithm repeatedly selects the smallest (or largest, depending on sorting order) element from the unsorted portion and moves it to the end of the sorted portion.
+
+Characteristics:
+Time Complexity: The worst-case and average-case time complexity isO(n2), making it inefficient on large lists.
+Space Complexity: It is an in-place sorting algorithm, meaning it requires a constant amount of additional space, O(1).
+Stability: Selection sort is generally not stable; equal elements may not maintain their relative order.
+
+Alogrithm:-
+
+1. Input the Array:
+	-Read a line of input from the user, which contains numbers separated by spaces.
+	-Convert the input string into a list of integers and store it in the variable array.
+2. Outer Loop:
+	-Start a loop that iterates over each index i of the array from 0 to the last index (i.e., len(array) - 1).
+	-This loop represents the position where the next minimum element will be placed.
+3. Initialize Temporary Variable:
+	-Set a temporary variable temp to the current index i. This variable will keep track of the index of the minimum element found in the unsorted portion of the array.
+4. Inner Loop:
+	-Start another loop that iterates over the remaining unsorted elements of the array from i+1 to the last index. The index for this loop is j.
+	-For each element at index j, compare it with the element at index temp (the current minimum):
+		-If array[j] is less than array[temp], update temp to be j. This indicates that a new minimum has been found.
+5. Swap Elements:
+	-After the inner loop finishes, check if temp has changed from its initial value of i:
+		-If temp is not equal to i, swap the elements at indices i and temp. This places the smallest element found in its correct position at index i.
+6. Repeat:
+	-Return to step 2 and repeat the process for the next index i, progressively sorting the array until the outer loop completes.
+7.Output the Sorted Array:
+	-After the outer loop finishes, print the sorted array.
+		

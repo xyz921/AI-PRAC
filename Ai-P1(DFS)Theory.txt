@@ -1,0 +1,35 @@
+Prac1:- DFS
+
+Title:--------
+
+problem statement: Implement-------
+
+Theory:- 
+Depth-First Search (DFS) is a graph traversal algorithm that explores as far along each branch as possible before backtracking. It's commonly used to explore or search through graph data structures and is implemented using recursion or a stack.
+
+Key Characteristics:
+
+Exploration Strategy: Goes deep into a branch before moving to the next.
+Data Structure: Typically uses a stack (implicitly via recursion or explicitly).
+Time Complexity: 𝑂(𝑉+𝐸), where 𝑉V is the number of vertices and 𝐸E is the number of edges.
+Applications:
+Pathfinding
+Topological sorting
+Detecting cycles in graphs
+Solving puzzles (like mazes)
+
+Alogrithm:-
+
+1.Initialize a visited set to keep track of visited nodes.
+2.Define the DFS function:
+	-Input: node, graph, and visited.
+	-Process:
+	   1.Check if the node is already in visited:
+		-If the node has been visited, do nothing and exit the function for that node.
+		-If it hasn’t been visited:
+			-Print or process the node as needed.
+			-Add the node to the visited set.
+	   2.For each neighbor of the node in graph[node]:
+  		-Call the DFS function recursively on each neighbor that hasn’t been visited yet.
+3.Start DFS traversal from a chosen starting node:
+	-Call the dfs function with the starting node, graph, and visited

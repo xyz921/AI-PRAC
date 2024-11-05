@@ -1,0 +1,57 @@
+Prac3:- A* algo
+
+Title:--------
+
+problem statement: Implement-------
+
+Theory:- 
+A Constraint Satisfaction Problem (CSP) is a mathematical problem defined by a set of variables, each with possible values (domains), and constraints that restrict the combinations of values the variables can simultaneously take. The goal is to assign values to all variables while satisfying all constraints.
+
+Key Components:
+
+1. Variables: The elements that need to be assigned values.
+2. Domains: Possible values for each variable.
+3. Constraints: Rules that limit allowable values or value combinations for the variables.
+
+Examples:
+
+1. Sudoku: Variables are cells, domains are numbers (1-9), and constraints ensure unique values per row, column, and 3x3 grid.
+2. Map Coloring: Variables are regions on a map, domains are colors, and constraints require that no two adjacent regions share the same color.
+
+Solution Techniques:
+
+1. Backtracking: A depth-first search approach that assigns values, backtracking when constraints are violated.
+2. Constraint Propagation: Reduces domains by propagating constraints, helping to prune the search space (e.g., forward checking).
+3. Heuristics: Techniques like Minimum Remaining Values (MRV) and Degree Heuristic help make efficient variable assignments.
+
+Alogrithm:-
+
+1. Initialize the Chessboard:
+	-Create an N×N matrix (or list of lists) initialized to zero, where zero represents an empty 	cell.
+2. Define the Backtracking Function:
+	-Create a recursive function, place_queen(n), where n represents the number of queens left to 	place on the board.
+3. Base Case:
+	-If n equals zero (i.e., all queens have been successfully placed), return True and print or store the current 	configuration of the board.
+4. Iterate Through Rows:
+	-For each row (from 0 to N−1):
+	-For each column (from 0 to N−1):
+		-Check if placing a queen at the current cell (row,col) is safe.
+5. Check for Safe Placement:
+	-Implement a function is_safe(row, col) that checks:
+		-No other queens in the same column.
+		-No other queens in the left-to-right diagonal.
+		-No other queens in the right-to-left diagonal.
+	-If it is safe:
+		-Place the queen by setting board[row][col] = 1.
+6. Recursive Call:
+	-Recursively call place_queen(n - 1) to attempt to place the next queen.
+	-If placing the next queen returns True, the current arrangement is valid.
+7. Backtrack if Needed:
+	-If placing the next queen does not lead to a solution:
+		-Remove the queen by resetting board[row][col] = 0 (backtrack).
+		-Continue checking the next column in the current row.
+8. Return False if No Placement is Found:
+	-If no safe position is found after checking all columns in the current row, return 	False to backtrack to the previous row.
+9. Driver Code:
+	-Initialize the board and call place_queen(N) with the number of queens N.
+	-Print all valid configurations found.

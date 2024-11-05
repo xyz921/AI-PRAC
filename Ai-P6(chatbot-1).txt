@@ -1,0 +1,112 @@
+Prac6:- Chatbot
+
+from fuzzywuzzy import fuzz
+import random
+
+# Define anime recommendations for each genre
+anime_recommendations = {
+    "action": ["Attack on Titan", "My Hero Academia", "One Piece", "Naruto", "Dragon Ball Z"],
+    "adventure": ["Fullmetal Alchemist: Brotherhood", "Hunter x Hunter", "One Piece", "Naruto", "Attack on Titan"],
+    "comedy": ["One Punch Man", "Gintama", "Konosuba", "Nichijou", "The Devil is a Part-Timer!"],
+    "drama": ["Your Lie in April", "Clannad", "Anohana", "Violet Evergarden", "Steins;Gate"],
+    "fantasy": ["Sword Art Online", "Attack on Titan", "Fullmetal Alchemist: Brotherhood", "Re:Zero", "Fairy Tail"],
+    "sci-fi": ["Steins;Gate", "Cowboy Bebop", "Neon Genesis Evangelion", "Ghost in the Shell", "Code Geass"],
+    "slice of life": ["K-On!", "Barakamon", "Hyouka", "March Comes in Like a Lion", "Toradora!"]
+}
+casual={'how are you?':'I am working fine, so I guess I am alright! How about you?',
+        'i am ok,fine': 'Thats nice to know',
+        'what is your name?': 'My name is Ruka',
+        'who are you': 'I am Ruka. I am an anime suggesting chatbot',
+        'what can you do?': 'I am an anime suggesting chatbot. I can recommend you animes based on your favourite genres.'}
+
+# Function to find the closest match for genres
+def find_closest_genre(user_input):
+    matches = []
+    for genre in anime_recommendations.keys():
+        ratio = fuzz.ratio(user_input, genre)
+        if ratio > 70:  # Adjust threshold as needed
+            matches.append((genre, ratio))
+    if matches:
+        closest_match = max(matches, key=lambda x: x[1])[0]
+        return closest_match
+    else:
+        return None
+
+def suggest_anime(genres):
+    recommendations = []
+    for genre in genres:
+        closest_genre = find_closest_genre(genre)
+        if closest_genre:
+            recommendations.extend(anime_recommendations[closest_genre])
+    return recommendations
+
+
+def suggest():
+    while True:
+        print('Ruka: Enter your preferred genres (comma-separated): ')
+        user_input = input("You: ").lower()
+        user_genres = [genre.strip() for genre in user_input.split(",")]
+       
+        recommendations = suggest_anime(user_genres)
+        if recommendations:
+            print("\nRuka: Here are some anime recommendations for you:")
+            for recommendation in random.sample(recommendations, min(len(recommendations), 5)):
+                print("-", recommendation)
+        else:
+            print("\nRuka: Sorry, I couldn't find any recommendations for the specified genres.")
+       
+        continue_chat = input("\nRuka: Would you like more recommendations? \nYou: (yes/no)").lower()
+        while continue_chat not in ('y','n','no','yes'):
+            continue_chat = input("\nRuka: Could'nt understand you. \n Would you like more recommendations? \nYou: (yes/no)").lower()
+        if continue_chat not in ('y','yes'):
+            print("Ruka: Have a nice day! See you again later!")
+            break
+    return 
+
+def chating(inp):
+    if 'recom' in inp or 'sug' in inp:
+        print("Ruka: SURE!!")
+        suggest()
+        return True
+    
+    if 'hi' in inp or 'hey' in inp or 'hello' in inp:
+        print('Ruka: ',random.choice(["Hello!", "Hi there!", "Hey!", "how you doin?", "Howdy!"]))
+        return False
+        
+    matches = []
+    for chat in casual.keys():
+        ratio = fuzz.ratio(inp, chat)
+        if ratio > 50:  # Adjust threshold as needed
+            matches.append((chat, ratio))
+    if matches:
+        closest_match = max(matches, key=lambda x: x[1])[0]
+        print('Ruka: ',casual[closest_match])
+        return False
+    else: 
+        print("Ruka: I could'nt quite undersand you. Can you rephrase the sentence")
+    
+while True:
+    inp=input('You: ').lower()
+    if chating(inp): break
+
+output:- 
+Ruka:  Hi there!
+Ruka:  I am working fine, so I guess I am alright! How about you?
+Ruka:  Thats nice to know
+Ruka:  I am an anime suggesting chatbot. I can recommend you animes based on your favourite genres.
+Ruka: SURE!!
+Ruka: Enter your preferred genres (comma-separated): 
+Ruka: Here are some anime recommendations for you:
+- Naruto
+- Attack on Titan
+- Sword Art Online
+- One Piece
+- Fullmetal Alchemist: Brotherhood
+Ruka: Enter your preferred genres (comma-separated): 
+Ruka: Here are some anime recommendations for you:
+- March Comes in Like a Lion
+- K-On!
+- Barakamon
+- Hyouka
+- Toradora!
+Ruka: Have a nice day! See you again later!

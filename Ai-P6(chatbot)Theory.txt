@@ -1,0 +1,68 @@
+Prac6:- chatbot
+
+Title:--------
+
+problem statement: Implement-------
+
+Theory:- 
+Chatbots are artificial intelligence (AI) programs designed to simulate human conversation through text or voice interactions. They can be integrated into various platforms, including websites, messaging apps, and mobile applications. Chatbots utilize natural language processing (NLP) to understand and respond to user queries effectively.
+
+Applications of Chatbots:
+1.Customer Support: Chatbots provide 24/7 customer service by answering frequently asked questions, resolving issues, and guiding users through processes, thus reducing the need for human intervention.
+
+2.E-commerce Assistance: They assist customers in finding products, making purchases, and tracking orders, enhancing the shopping experience.
+
+3.Lead Generation: Chatbots can engage visitors on websites, qualify leads through interactive conversations, and collect valuable data for sales teams.
+
+4. Booking and Reservations: They streamline appointment scheduling, flight bookings, hotel reservations, and event registrations by providing real-time availability and confirmations.
+
+Why Use Chatbots on Websites:
+Enhanced User Experience: Chatbots provide quick responses to inquiries, ensuring users receive the information they need without long wait times.
+
+Increased Engagement: By interacting with visitors, chatbots can keep users engaged and guide them through the website, leading to higher conversion rates.
+
+Cost Efficiency: Implementing chatbots can significantly reduce operational costs by handling routine queries that would otherwise require human agents.
+
+Availability: Chatbots can operate around the clock, providing support to users in different time zones without the constraints of human work hours.
+
+Alogrithm:-
+
+1. Initialize Data Structures:
+	-Define a dictionary anime_recommendations that contains various genres as keys and 	corresponding lists of anime titles as values.
+	-Define a dictionary casual that contains casual questions/phrases as keys and the 	chatbot's responses as values.
+2.Define the Function to Find Closest Genre:
+	-Create a function find_closest_genre(user_input) that:
+		-Initializes an empty list matches to store genres that closely match the user input.
+		-Iterates through each genre in the anime_recommendations:
+			-Calculate the similarity ratio between user_input and the genre using fuzz.ratio.
+			-If the ratio exceeds a predefined threshold (e.g., 70), add the genre and its ratio to the matches list.
+		-If matches is not empty, return the genre with the highest similarity ratio; otherwise, return None.
+3. Define the Anime Suggestion Function:
+	-Create a function suggest_anime(genres) that:
+		-Initializes an empty list recommendations.
+		-For each genre in the provided list:
+			-Call find_closest_genre to find the closest matching genre.
+			-If a match is found, extend the recommendations list with the anime titles from that genre.
+		-Return the list of anime recommendations.
+4. Define the Suggest Function for Interaction:
+	-Create a function suggest() that:
+		-Enters a loop to interact with the user for genre preferences.
+		-Prompts the user to enter preferred genres as a comma-separated string.
+		-Converts the input into a list of genres and calls suggest_anime to get recommendations.
+		-If recommendations are found, print a random sample (up to 5) of the suggestions; if not, notify the user.
+		-Ask the user if they want more recommendations; if they respond negatively, exit the loop.
+5. Define the Chat Function for User Interaction:
+	-Create a function chating(inp) that:
+		-Checks if the input indicates a request for recommendations (keywords like "recom" or "sug").
+			-If true, respond affirmatively and call suggest().
+		-Check for greeting phrases (e.g., "hi", "hey", "hello") and respond with a random greeting.
+		-If the input does not match predefined responses, check against the casual dictionary using fuzzy matching:
+			-If a close match is found, print the corresponding response.
+			-If no close match is found, inform the user that their input was not understood.
+6. Main Loop for User Input:
+	-Enter a continuous loop to prompt the user for input.
+	-Call the chating(inp) function with the user's input.
+	-If chating indicates that the user wants to stop (returns True), exit the main loop.
+7. End Interaction:
+	-Optionally, print a farewell message to the user when they decide to stop interacting with the chatbot.
+		

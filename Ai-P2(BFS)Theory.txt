@@ -1,0 +1,39 @@
+Prac1:- DFS
+
+Title:--------
+
+problem statement: Implement-------
+
+Theory:- 
+Breadth-First Search (BFS) is a graph traversal algorithm that explores all nodes at the present depth level before moving on to nodes at the next depth level. It’s often used to find the shortest path in an unweighted graph and is implemented using a queue.
+
+Key Characteristics:
+
+Exploration Strategy: Visits neighbors layer by layer (breadth-first).
+Data Structure: Uses a queue to manage nodes to be explored.
+Time Complexity: O(V+E), where V is the number of vertices and E is the number of edges.
+
+Applications:
+Finding the shortest path in unweighted graphs
+Web crawling
+Social network analysis
+Level-order traversal in trees
+Alogrithm:-
+
+1.Initialize visited list to keep track of visited nodes.
+2.Initialize queue list to manage the nodes to be explored next.
+3.Define the BFS function:
+	-Input: node, graph, visited, and queue.
+	-Process:
+	   1.Start by visiting the root node:
+		-Add the starting node to both visited and queue.
+	   2.Begin the BFS loop:
+  		-While queue is not empty, do the following:
+	1.Remove the first node from queue (dequeue it) and assign it to m.
+	2.Print or process m as needed (here, it’s printed).
+	3.For each neighbor of m in graph[m]
+		-If the neighbor hasn’t been visited:
+			-Add it to visited to mark it as visited.
+			-Add it to queue for future exploration.
+4. Driver Code:
+	-Call the bfs function with the starting node ('5' in this case), graph, and visited.

@@ -1,0 +1,48 @@
+Prac3:- A* algo
+
+Title:--------
+
+problem statement: Implement-------
+
+Theory:- 
+A* Algorithm is a popular pathfinding and graph traversal algorithm, known for finding the shortest path in a weighted graph by combining the actual cost to reach a node and an estimated cost to reach the goal.
+
+Key Concepts:
+
+Evaluation Function: f(n)=g(n)+h(n)
+	-g(n): Actual cost from the start node to node n.
+	-h(n): Heuristic estimate of the cost from n to the goal.
+Heuristic: A* uses a heuristic function h(n) to prioritize nodes closer to the goal, making it efficient and optimal when 
+h(n) is admissible (never overestimates).
+
+Applications:
+Widely used in pathfinding (e.g., maps, games, robotics) because it’s efficient, optimal, and flexible with different heuristic functions.
+
+Alogrithm:-
+
+1. Initialize Sets and Maps:
+	-Open Set: Contains nodes to be evaluated, initialized with the start_node.
+	-Closed Set: Contains nodes already evaluated, initialized as empty.
+	-g Map: Stores the cost from the start_node to each node, initialized with g[start_node] = 0.
+	-parents Map: Stores the parent of each node for path reconstruction, initialized with 	          	parents[start_node] = start_node.
+2. Loop Until Open Set is Empty:
+	-Choose the Node with the Lowest f(n):
+		-For each node n in the open_set, compute f(n)=g(n)+h(n) (where h(n) is the heuristic).
+		-Select the node with the lowest f(n) as the current node n.
+	-If n is None, output "Path does not exist" and exit the loop
+3.Check if Target Node is Reached:
+	-If the current node n is the stop_node, start reconstructing the path by backtracking from stop_node to start_node 	using the parents map, and print the path.
+4. Evaluate Neighbors:
+	-For each neighbor m of the current node n:
+	-If m is Not in Open or Closed Sets:
+		-Add m to open_set.
+		-Set parents[m] = n.
+		-Update g[m] with the new cost (g[n] + weight from n to m).
+	-If m is Already Visited with a Higher Cost:
+		-If g[m] is greater than g[n] + weight, update g[m] to the new lower cost.
+		Update parents[m] = n to reflect the shorter path.
+		-If m is in closed_set, move it back to open_set to re-evaluate it.
+5. Move the Current Node to Closed Set:
+	-Remove n from open_set and add it to closed_set since all its neighbors have been 	processed.
+6. Output If Path Does Not Exist:
+	-If the open_set is empty and the stop_node hasn’t been reached, print "Path does 	not exist" and exit.
