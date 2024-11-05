@@ -1,0 +1,78 @@
+Prac 3:-
+create db library;
+use library;
+create table borrower(rollin int(11) primary key not null, name char(20) not null, dateofissue date, bname char(20), status char(1));
+create table fine(rollno int(11), fdate date, amt int(11), foreign key (rollno) references borrower(rollin));
+desc borrower;
+desc fine;
+insert into values{ (1,'a', '2024-9-01', 'java', 'I'),
+...........
+.......
+};
+select * from borrower;
+select * from fine;
+
+delimiter $
+create procedure fine_calculation(IN rno int, bname char(20))
+begin 
+declare i_date date;
+declare diff int;
+declare fine_amt int;
+declare exit handler for sqlexception select 'Table not found';
+select dateofissue into i_date from borrower where rollin=rno and bnamme=bname;
+select datediff(currdate(), i_date) into diff;
+if (diff>15 and diff<+30) then
+set fine_amt=diff*5;
+insert into fine values (rno, currdate(), fine_amt);
+elseif (diff>30) then
+set fine_amt = 15*5+(diff-30)*50;
+insert into fine values (rno, currdate(), fine_amt);
+end if;
+update borrower set status ='R' where rollin=rno and bname=bname;
+end;
+
+call fine_calculation(3, 'dbms');
+->$
+select * from fine;
+call fine_calculation(1, 'java');
+select * from fine;
+...(all 4 rollin)
+
+
+Prac4:-
+create database record;
+use record;
+create table o_rollcall(rno int(11) primary key not null, name char(20), addr varchar(30));
+create table n_rollcall(rno int(11), name varchar(20), addr varchar(30));
+insert into 0_rollcall values (1, 'sunny', 'wabletown'), (2, 'harshit', 'naxal forest'), (3, 'xyz', 'latur pond'), (4, xyz, Mumbai floods);
+insert into n_rollcall values(same 1st 3)
+
+desc o_rollcall;
+desc n_rollcall;
+select * from o_rollcall;
+select * from n_rollcall;
+insert into o_roll_call values (5, 'bitboi', 'bihar city');
+select * from o_rollcall
+
+delimiter $
+create procedure n1(IN rno1 iint)
+begin 
+declare rno2 int;
+declare exit_cond Boolean;
+declare c1 cursor for select rno from o_rollcall where rno>rno1;
+declare continue handler for not found set exit_cond=TRUE;
+open c1;
+l1:loop;
+fetch c1 into rno2;
+if not exists(select *  from n_rollcall where rno = rno2) then
+insert into n_rollcall select * from o_rollcall where rno=rno2;
+end if;
+if exit_cond then
+close c1;
+leave l1;
+end if;
+end loop l1;
+end;
+
+call n1(3);
+select * from n_rollcall;

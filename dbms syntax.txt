@@ -1,0 +1,22 @@
+create database {db name}
+
+use {db name}
+
+create table {table name} (ID int primary key, name varchar(10),....)
+
+desc {table name} 
+
+insert into {table name} (ID, name,..)
+Values ('123', "RAJ",...);
+
+delete from {table name} where condition
+
+update {table name} set new_data where condition
+
+select * from table1 inner join table2 on condition
+
+create view {view name} as 
+select col1, col2,...
+from table1, table2,...
+where condition
+
